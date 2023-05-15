@@ -1,0 +1,56 @@
+//VARIABLES
+
+$color-principal: rgb(43, 105, 117);
+
+
+//botones propios
+.custom-btn {
+  color: white;
+  background-color: $color-principal;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+//bienvenida
+h3,
+p {
+  text-align: center;
+  margin-top: 30px;
+}
+.bienvenida {
+  animation: desde-abajo 2s;
+}
+h3 {
+  color: $color-principal;
+  font-size: 3em;
+  margin-top: 100px;
+  font-weight: 300;
+}
+p {
+  font-size: 1.3em;
+  font-weight: 200;
+}
+
+//parte empezar llenado
+
+.btn-empezar {
+  border-radius: 10px;
+  box-shadow: 2.5px 2.5px 5px rgba(71, 111, 112, 0.335);
+  padding: 10px;
+  margin: 0 auto;
+  width: 350px;
+  margin-top: 40px;
+  display: block;
+  color: rgb(45, 107, 87);
+  font-size: 1.5em;
+  font-weight: bold;
+  animation: desde-arriba 2s;
+  transition: scale 1s, color 1s;
+  background-color: white;
+  z-index: 10;
+  &:hover {
+    scale: 1.05;
+    color: rgb(80, 130, 128);
+    transition: scale 1s, color 1s;
+  }
+}

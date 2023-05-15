@@ -1,0 +1,74 @@
+.puerta-derecha {
+  width: 50%;
+  height: 100vh;
+  position: absolute;
+  right: 0;
+  background-color: rgb(103, 167, 178);
+  z-index: 100;
+  animation: de-derecha 1.25s both ease-out;
+}
+.puerta-izquierda {
+  width: 50%;
+  height: 100vh;
+  position: absolute;
+  left: 0;
+  background-color: red;
+  z-index: 100;
+  animation: de-izquierda 1.25s both ease-out;
+}
+//titulos
+h2 {
+  font-size: 2.5em;
+  font-weight: 200;
+  text-align: center;
+  margin-top: 100px;
+  animation: desde-arriba 1.5s;
+}
+h3 {
+  font-size: 1.5em;
+  font-weight: 300;
+  text-align: center;
+}
+
+//formulario
+form {
+  margin-top: 100px;
+  animation: desde-abajo 2s;
+}
+
+//botones
+
+.custom-btn {
+  border-radius: 5px;
+  border: 1px solid rgb(38, 101, 156);
+  margin: 20px 0;
+  width: 100%;
+  color: rgb(38, 101, 156);
+  font-weight: bold;
+  margin-top: 60px;
+  &:hover {
+    background-color: rgb(38, 101, 156);
+    color: white;
+    transition: background-color 0.5s, color 0.5s;
+  }
+  animation: desde-arriba 2s;
+}
+
+.btn-siguiente {
+  background-color: rgb(38, 101, 156);
+  color: white;
+}
+
+//mostrar - ocultar
+.mostrar {
+  opacity: 1;
+  transform: translateX(0%);
+  transition: opacity 1s, transform 1s;
+}
+
+.ocultar {
+  display: none;
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: opacity 1s, transform 1s;
+}
