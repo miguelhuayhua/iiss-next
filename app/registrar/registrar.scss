@@ -72,3 +72,8 @@ form {
   transform: translateX(-100%);
   transition: opacity 1s, transform 1s;
 }
+
+//mostrar y ocultar elementos del formulario
+.show-component{
+  display: none;
+}

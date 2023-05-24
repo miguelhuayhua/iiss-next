@@ -6,19 +6,27 @@ import {
   FormGroup,
   InputLabel,
   MenuItem,
+  Radio,
+  RadioGroup,
   Select,
   TextField,
 } from "@mui/material";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
-export default function FormularioServicioInternet() {
+export default function FormularioServicioInternet(props: any) {
+  const { getData } = props;
   //estados para cada checkbox
   const [servicio1, setServicio1] = useState(0);
   const [servicioMulti1, setServicioMulti1] = useState<number[]>([]);
+  //evento antes del cargado para llenar los datos main al principal
+  useEffect(() => {
+    getData({ servicioInternet: { servicio1, servicioMulti1 } });
+  });
   //manejo de eventos de los checkboxs
   const handleChange1 = (event: ChangeEvent<HTMLInputElement>) => {
     const value = Number(event.target.value);
     setServicio1(value);
+    getData({ servicioInternet: { servicio1, servicioMulti1 } });
   };
 
   const handleMultiChange1 = (event: ChangeEvent<HTMLInputElement>) => {
@@ -28,7 +36,12 @@ export default function FormularioServicioInternet() {
       servicioMulti1.splice(index, 1);
       setServicioMulti1([...servicioMulti1]);
     } else {
-      setServicioMulti1([...servicioMulti1, value]);
+      if (value == 4) {
+        setServicioMulti1([value]);
+      } else {
+        setServicioMulti1([...servicioMulti1, value]);
+      }
+      getData({ servicioInternet: { servicio1, servicioMulti1 } });
     }
   };
   return (
@@ -36,9 +49,8 @@ export default function FormularioServicioInternet() {
       <div className="row">
         <div className="col-8 offset-2">
           <FormGroup>
-            <h3>
-              La persona accede a internet desde: (marque más de una opción)
-            </h3>
+            <h3>La persona accede a internet desde:</h3>
+            <small>(Puede marcar más de una opción)</small>
             <div className="d-flex flex-wrap">
               <FormControlLabel
                 control={
@@ -48,7 +60,7 @@ export default function FormularioServicioInternet() {
                     value="1"
                   />
                 }
-                label="Propia"
+                label="Vivienda"
               />
               <FormControlLabel
                 control={
@@ -58,7 +70,7 @@ export default function FormularioServicioInternet() {
                     value="2"
                   />
                 }
-                label="Alquilada"
+                label="Lugares Públicos"
               />
               <FormControlLabel
                 control={
@@ -68,7 +80,7 @@ export default function FormularioServicioInternet() {
                     value="3"
                   />
                 }
-                label="Anticrético"
+                label="Teléfono / Celular"
               />
               <FormControlLabel
                 control={
@@ -78,96 +90,46 @@ export default function FormularioServicioInternet() {
                     value="4"
                   />
                 }
-                label="Cedida por servicios"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={servicioMulti1.includes(5)}
-                    onChange={handleMultiChange1}
-                    value="5"
-                  />
-                }
-                label="Prestada por parientes o amigos"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={servicioMulti1.includes(6)}
-                    onChange={handleMultiChange1}
-                    value="6"
-                  />
-                }
-                label="Contrato Mixto (alquiler o anticrético)"
+                label="No accede a internet"
               />
             </div>
           </FormGroup>
         </div>
-        <div className="col-8 offset-2">
+        <div
+          className={
+            servicioMulti1.includes(4) ? "ocultar" : "col-8 offset-2 mostrar"
+          }
+        >
           <FormGroup>
-            <h3>¿Con qué frecuencia usa internet? (marque solo una opción)</h3>
-            <div className="d-flex flex-wrap">
+            <h3>¿Con qué frecuencia usa internet?</h3>
+            <small> (marque solo una opción)</small>
+            <RadioGroup
+              aria-labelledby="demo-radio-buttons-group-label"
+              defaultValue="1"
+              name="radio-tiene-trabajo"
+              onChange={handleChange1}
+            >
               <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={servicio1 == 1}
-                    onChange={handleChange1}
-                    value="1"
-                  />
-                }
-                label="Propia"
+                value="1"
+                control={<Radio />}
+                label="Diariamente"
               />
               <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={servicio1 == 2}
-                    onChange={handleChange1}
-                    value="2"
-                  />
-                }
-                label="Alquilada"
+                value="2"
+                control={<Radio />}
+                label="Más de una vez a la semana"
               />
               <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={servicio1 == 3}
-                    onChange={handleChange1}
-                    value="3"
-                  />
-                }
-                label="Anticrético"
+                value="3"
+                control={<Radio />}
+                label="Una vez a la semana"
               />
               <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={servicio1 == 4}
-                    onChange={handleChange1}
-                    value="4"
-                  />
-                }
-                label="Cedida por servicios"
+                value="4"
+                control={<Radio />}
+                label="Una vez al mes"
               />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={servicio1 == 5}
-                    onChange={handleChange1}
-                    value="5"
-                  />
-                }
-                label="Prestada por parientes o amigos"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={servicio1 == 6}
-                    onChange={handleChange1}
-                    value="6"
-                  />
-                }
-                label="Contrato Mixto (alquiler o anticrético)"
-              />
-            </div>
+            </RadioGroup>
           </FormGroup>
         </div>
       </div>

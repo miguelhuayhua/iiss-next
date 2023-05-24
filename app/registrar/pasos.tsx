@@ -9,6 +9,10 @@ import FormularioActividadLaboral from "./formulario-actvidadlaboral";
 export default function Pasos() {
   const [count, setCount] = useState(0);
 
+  //DATOS DE FORMULARIOS
+  let [mainData, setMainData] = useState({});
+  //Formulario Datos Personales
+
   //eventos
   const handleNext: MouseEventHandler<HTMLButtonElement> = (ev) => {
     setCount(count + 1);
@@ -16,7 +20,15 @@ export default function Pasos() {
   const handlePrev: MouseEventHandler<HTMLButtonElement> = (ev) => {
     setCount(count - 1);
   };
+  //LLAMADO DE DATOS HIJOS
+  let getDatos = (data: any) => {
+    setMainData({ ...mainData, ...data });
+  };
 
+  //ENVÍO DE DATOS
+  const enviarDatos = () => {
+    console.log(mainData);
+  };
   return (
     <>
       <div className={count == 0 ? "mostrar" : "ocultar"}>
@@ -27,7 +39,9 @@ export default function Pasos() {
         </div>
         <div className="row">
           <div className="col-10 offset-1">
-            <FormularioDatosPersonales></FormularioDatosPersonales>
+            <FormularioDatosPersonales
+              getData={getDatos}
+            ></FormularioDatosPersonales>
           </div>
           <div className="col-4 offset-4">
             <button className="btn custom-btn" onClick={handleNext}>
@@ -44,7 +58,9 @@ export default function Pasos() {
         </div>
         <div className="row">
           <div className="col-10 offset-1">
-            <FormularioServiciosBasicos></FormularioServiciosBasicos>
+            <FormularioServiciosBasicos
+              getData={getDatos}
+            ></FormularioServiciosBasicos>
           </div>
           <div className="col-4 offset-4 col-md-2 offset-md-4">
             <button className="btn custom-btn" onClick={handlePrev}>
@@ -64,12 +80,14 @@ export default function Pasos() {
       <div className={count == 2 ? "mostrar" : "ocultar"}>
         <div className="row">
           <div className="col-6 offset-3">
-            <h2>Ingrese los datos de Servicios Básicos</h2>
+            <h2>Ingrese los datos de Acceso a Internet</h2>
           </div>
         </div>
         <div className="row">
           <div className="col-10 offset-1">
-            <FormularioServicioInternet></FormularioServicioInternet>
+            <FormularioServicioInternet
+              getData={getDatos}
+            ></FormularioServicioInternet>
           </div>
           <div className="col-4 offset-4 col-md-2 offset-md-4">
             <button className="btn custom-btn" onClick={handlePrev}>
@@ -94,7 +112,9 @@ export default function Pasos() {
         </div>
         <div className="row">
           <div className="col-10 offset-1">
-            <FormularioMedioTransporte></FormularioMedioTransporte>
+            <FormularioMedioTransporte
+              getData={getDatos}
+            ></FormularioMedioTransporte>
           </div>
           <div className="col-4 offset-4 col-md-2 offset-md-4">
             <button className="btn custom-btn" onClick={handlePrev}>
@@ -119,7 +139,9 @@ export default function Pasos() {
         </div>
         <div className="row">
           <div className="col-10 offset-1">
-            <FormularioActividadLaboral></FormularioActividadLaboral>
+            <FormularioActividadLaboral
+              getData={getDatos}
+            ></FormularioActividadLaboral>
           </div>
           <div className="col-4 offset-4 col-md-2 offset-md-4">
             <button className="btn custom-btn" onClick={handlePrev}>
@@ -129,6 +151,7 @@ export default function Pasos() {
           <div className="col-4 col-md-2">
             <button
               className="btn custom-btn btn-siguiente"
+              onClick={enviarDatos}
             >
               Terminar y Enviar
             </button>

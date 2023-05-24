@@ -7,167 +7,26 @@ import {
   SelectChangeEvent,
   TextField,
 } from "@mui/material";
+//data
+import { departamentos } from "./data";
 //estilos
 import "./registrar.scss";
-import { type } from "os";
-import { ChangeEvent, ChangeEventHandler, useState } from "react";
-//type
-interface Persona {
-  nombres: string;
-  paterno: string;
-  materno: string;
-  provincia: string;
-  departamento: string;
-  localidad: string;
-  oficialia: number;
-  libro: number;
-  partida: number;
-  folio: number;
-  f_nacimiento: string;
-  ci: number;
-  complemento: number;
-  expedido: string;
-}
+import { ChangeEvent, ChangeEventHandler, useEffect, useState } from "react";
+//tipos
+import { Persona } from "./types";
 //props
-export default function FormularioDatosPersonales() {
-  let departamentos: {
-    departamento: string;
-    provincias: string[];
-    localidades: string[];
-  }[] = [
-    {
-      departamento: "La Paz",
-      provincias: [
-        "Aroma",
-        "Bautista Saavedra",
-        "Caranavi",
-        "Franz Tamayo",
-        "Gualberto Villarroel",
-        "Ingavi",
-        "Inquisivi",
-        "José Manuel Pando",
-        "Larecaja",
-        "Loayza",
-        "Los Andes",
-        "Manco Kapac",
-        "Muñecas",
-        "Nor Yungas",
-        "Omasuyos",
-        "Pacajes",
-        "Pedro Domingo Murillo",
-        "Sud Yungas",
-      ],
-      localidades: [
-        "La Paz",
-        "El Alto",
-        "Viacha",
-        "Achocalla",
-        "Mecapaca",
-        "Palca",
-        "Patacamaya",
-        "Coroico",
-        "Chulumani",
-        "Copacabana",
-        "Sorata",
-        "Charazani",
-        "Puerto Acosta",
-        "Desaguadero",
-        "Apolo",
-      ],
-    },
-    {
-      departamento: "Cochabamba",
-      provincias: [
-        "Arani",
-        "Arque",
-        "Ayopaya",
-        "Bolívar",
-        "Carrasco",
-        "Cercado",
-        "Chapare",
-        "Esteban Arce",
-        "Germán Jordán",
-        "Mizque",
-        "Punata",
-        "Quillacollo",
-        "Tapacarí",
-        "Tiraque",
-      ],
-      localidades: [
-        "Cochabamba",
-        "Sacaba",
-        "Quillacollo",
-        "Colcapirhua",
-        "Tiquipaya",
-        "Vinto",
-        "Arani",
-        "Punata",
-        "Cliza",
-        "Arque",
-        "Aiquile",
-        "Totora",
-        "Tarata",
-        "Villa Tunari",
-        "Chimore",
-        "Entre Ríos",
-      ],
-    },
-    {
-      departamento: "Santa Cruz",
-      provincias: [
-        "Andrés Ibáñez",
-        "Ángel Sandoval",
-        "Chiquitos",
-        "Cordillera",
-        "Florida",
-        "Germán Busch",
-        "Guarayos",
-        "Ichilo",
-        "Ignacio Warnes",
-        "José Miguel de Velasco",
-        "Ñuflo de Chávez",
-        "Obispo Santistevan",
-        "Sara",
-        "Vallegrande",
-      ],
-      localidades: [
-        "Santa Cruz de la Sierra",
-        "Warnes",
-        "Montero",
-        "Cotoca",
-        "San Ignacio de Velasco",
-        "Camiri",
-        "Puerto Suárez",
-        "Riberalta",
-        "Guayaramerín",
-        "Roboré",
-        "San José de Chiquitos",
-        "San Matías",
-        "Ascensión de Guarayos",
-        "Yapacaní",
-        "Comarapa",
-        "Samaipata",
-        "Vallegrande",
-        "Buena Vista",
-        "Charagua",
-        "Concepción",
-      ],
-    },
-  ];
+export default function FormularioDatosPersonales(props: any) {
+  const { getData } = props;
   //datos como estado
   let [persona, setPersona] = useState<Persona>({
-    ci: 0,
-    complemento: 1,
+    ci: "",
+    complemento: "",
     departamento: "La Paz",
-    expedido: "",
+    expedido: "La Paz",
     f_nacimiento: "",
-    folio: 0,
-    libro: 0,
     localidad: "",
     materno: "",
     nombres: "",
-    oficialia: 0,
-    partida: 0,
     paterno: "",
     provincia: "",
   });
@@ -180,16 +39,48 @@ export default function FormularioDatosPersonales() {
   );
   //datos para el formulario
 
-  //eventos
+  //eventos de cambio de estados
   let handlePaterno = (ev: ChangeEvent<HTMLInputElement>) => {
     setPersona({ ...persona, paterno: ev.target.value });
+    getData({ persona });
   };
   let handleMaterno = (ev: ChangeEvent<HTMLInputElement>) => {
     setPersona({ ...persona, materno: ev.target.value });
+    getData({ persona });
   };
   let handleNombres = (ev: ChangeEvent<HTMLInputElement>) => {
     setPersona({ ...persona, nombres: ev.target.value });
+    getData({ persona });
   };
+  let handleExpedido = (ev: SelectChangeEvent<string>) => {
+    setPersona({ ...persona, expedido: ev.target.value });
+    getData({ persona });
+  };
+  let handleOficialia = (ev: ChangeEvent<HTMLInputElement>) => {
+    setPersona({ ...persona, oficialia: Number.parseInt(ev.target.value) });
+    getData({ persona });
+  };
+  let handleLibro = (ev: ChangeEvent<HTMLInputElement>) => {
+    setPersona({ ...persona, libro: Number.parseInt(ev.target.value) });
+    getData({ persona });
+  };
+  let handleFolio = (ev: ChangeEvent<HTMLInputElement>) => {
+    setPersona({ ...persona, folio: Number.parseInt(ev.target.value) });
+    getData({ persona });
+  };
+  let handleFecha = (ev: ChangeEvent<HTMLInputElement>) => {
+    setPersona({ ...persona, f_nacimiento: ev.target.value });
+    getData({ persona });
+  };
+  let handleCarnet = (ev: ChangeEvent<HTMLInputElement>) => {
+    setPersona({ ...persona, ci: ev.target.value });
+    getData({ persona });
+  };
+  let handleComplemento = (ev: ChangeEvent<HTMLInputElement>) => {
+    setPersona({ ...persona, complemento: ev.target.value });
+    getData({ persona });
+  };
+
   let handleDepartamento = (ev: SelectChangeEvent<string>) => {
     setPersona({
       ...persona,
@@ -203,19 +94,24 @@ export default function FormularioDatosPersonales() {
     let localidad = departamentos.find(
       (value) => value.departamento == ev.target.value
     )!.localidades;
-    console.log(provincia, localidad, departamentos, persona);
     setProvincias([...provincia]);
     setLocalidades([...localidad]);
+    getData({ persona });
   };
   let handleProvincia = (ev: SelectChangeEvent<string>) => {
     setPersona({ ...persona, provincia: ev.target.value });
+    getData({ persona });
   };
   let handleLocalidad = (ev: SelectChangeEvent<string>) => {
     setPersona({ ...persona, localidad: ev.target.value });
+    getData({ persona });
   };
+  //evento antes del cargado para llenar los datos main al principal
+  useEffect(() => {
+    getData({ persona });
+  });
 
   //datos para el formulario
-
   return (
     <form action="">
       <div className="row">
@@ -224,6 +120,7 @@ export default function FormularioDatosPersonales() {
         </div>
         <div className="col-4 ">
           <TextField
+            required
             className="w-100"
             id="standard-basic"
             label="Apellido Paterno"
@@ -234,18 +131,24 @@ export default function FormularioDatosPersonales() {
         </div>
         <div className="col-4">
           <TextField
+            required
             className="w-100"
             id="standard-basic"
             label="Apellido Materno"
             variant="standard"
+            value={persona.materno}
+            onChange={handleMaterno}
           />
         </div>
         <div className="col-4">
           <TextField
+            required
             className="w-100"
             id="standard-basic"
             label="Nombres"
             variant="standard"
+            value={persona.nombres}
+            onChange={handleNombres}
           />
         </div>
 
@@ -275,7 +178,6 @@ export default function FormularioDatosPersonales() {
           <FormControl className="w-100">
             <InputLabel id="demo-simple-select-label">Provincia</InputLabel>
             <Select
-              error
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               label="Provincia"
@@ -284,7 +186,7 @@ export default function FormularioDatosPersonales() {
               onChange={handleProvincia}
             >
               {provincias.map((value, i) => (
-                <MenuItem key={i + 100} value={value}>
+                <MenuItem key={i} value={value}>
                   {value}
                 </MenuItem>
               ))}
@@ -316,33 +218,41 @@ export default function FormularioDatosPersonales() {
         <div className="col-3">
           <TextField
             className="w-100"
-            id="standard-basic"
             label="Oficialia N°"
             variant="standard"
+            required
+            onChange={handleOficialia}
+            value={persona.oficialia?.toString()}
+            type="number"
           />
         </div>
         <div className="col-3">
           <TextField
             className="w-100"
-            id="standard-basic"
             label="Libro N°"
             variant="standard"
+            value={persona.libro?.toString()}
+            onChange={handleLibro}
+            type="number"
           />
         </div>
         <div className="col-3">
           <TextField
             className="w-100"
-            id="standard-basic"
             label="Partida N°"
             variant="standard"
+            value={persona.partida?.toString()}
+            type="number"
           />
         </div>
         <div className="col-3">
           <TextField
             className="w-100"
-            id="standard-basic"
             label="Folio N°"
             variant="standard"
+            onChange={handleFolio}
+            value={persona.folio?.toString()}
+            type="number"
           />
         </div>
         <div className="col-8 offset-2 my-3">
@@ -351,10 +261,9 @@ export default function FormularioDatosPersonales() {
         <div className="col-4 offset-4">
           <TextField
             className="w-100"
-            id="standard-basic"
             variant="standard"
             type="date"
-            
+            onChange={handleFecha}
           />
         </div>
         <div className="col-8 offset-2 my-3">
@@ -367,6 +276,7 @@ export default function FormularioDatosPersonales() {
             id="standard-basic"
             label="Carnet de Identidad"
             variant="standard"
+            onChange={handleCarnet}
           />
         </div>
         <div className="col-4">
@@ -375,22 +285,27 @@ export default function FormularioDatosPersonales() {
             id="standard-basic"
             label="Complemento"
             variant="standard"
+            onChange={handleComplemento}
           />
         </div>
         <div className="col-4">
           <FormControl className="w-100">
             <InputLabel id="demo-simple-select-label">Expedido</InputLabel>
             <Select
+              required
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={"10"}
               label="Departamento"
               defaultValue="Bolivia"
               placeholder="Seleccione el departamento"
+              onChange={handleExpedido}
+              value={persona.expedido}
             >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              {departamentos.map((value, i) => (
+                <MenuItem key={i} value={value.departamento}>
+                  {value.departamento}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
         </div>
