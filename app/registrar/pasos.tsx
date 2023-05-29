@@ -7,8 +7,7 @@ import FormularioServicioInternet from "./formulario-internet";
 import FormularioMedioTransporte from "./formulario-transporte";
 import FormularioActividadLaboral from "./formulario-actvidadlaboral";
 
-//axios
-import axios from "axios";
+import DatosLlenados from "./datosllenados";
 export default function Pasos() {
   const [count, setCount] = useState(0);
 
@@ -21,48 +20,36 @@ export default function Pasos() {
   //Formulario Datos Personales
 
   //eventos
-  const handleNext: MouseEventHandler<HTMLButtonElement> = (ev) => {
-    setCount(count + 1);
-  };
   const handlePrev: MouseEventHandler<HTMLButtonElement> = (ev) => {
     setCount(count - 1);
   };
   //LLAMADO DE DATOS HIJOS
   let getDato1 = (data: any) => {
+    setCount(count + 1);
     setForm1({ ...form1, ...data });
   };
 
   let getDato2 = (data: any) => {
+    setCount(count + 1);
+
     setForm2({ ...form2, ...data });
   };
 
   let getDato3 = (data: any) => {
+    setCount(count + 1);
     setForm3({ ...form3, ...data });
   };
 
   let getDato4 = (data: any) => {
+    setCount(count + 1);
     setForm4({ ...form4, ...data });
   };
 
   let getDato5 = (data: any) => {
-    setForm5({ ...form5, ...data});
+    setCount(count + 1);
+    setForm5({ ...form5, ...data });
   };
 
-  //ENVÍO DE DATOS
-  const enviarDatos = async () => {
-    try {
-      const response = await axios.post("http://localhost:8000/apersona/", {
-        form1,
-        form2,
-        form3,
-        form4,
-        form5,
-      });
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
-  };
   return (
     <>
       <div className={count == 0 ? "mostrar" : "ocultar"}>
@@ -72,16 +59,9 @@ export default function Pasos() {
           </div>
         </div>
         <div className="row">
-          <div className="col-10 offset-1">
-            <FormularioDatosPersonales
-              getData={getDato1}
-            ></FormularioDatosPersonales>
-          </div>
-          <div className="col-4 offset-4">
-            <button className="btn custom-btn" onClick={handleNext}>
-              Siguiente
-            </button>
-          </div>
+          <FormularioDatosPersonales
+            handleNext={getDato1}
+          ></FormularioDatosPersonales>
         </div>
       </div>
       <div className={count == 1 ? "mostrar" : "ocultar"}>
@@ -91,24 +71,10 @@ export default function Pasos() {
           </div>
         </div>
         <div className="row">
-          <div className="col-10 offset-1">
-            <FormularioServiciosBasicos
-              getData={getDato2}
-            ></FormularioServiciosBasicos>
-          </div>
-          <div className="col-4 offset-4 col-md-2 offset-md-4">
-            <button className="btn custom-btn" onClick={handlePrev}>
-              Volver
-            </button>
-          </div>
-          <div className="col-4 col-md-2">
-            <button
-              className="btn custom-btn btn-siguiente"
-              onClick={handleNext}
-            >
-              Siguiente
-            </button>
-          </div>
+          <FormularioServiciosBasicos
+            handlePrev={handlePrev}
+            handleNext={getDato2}
+          ></FormularioServiciosBasicos>
         </div>
       </div>
       <div className={count == 2 ? "mostrar" : "ocultar"}>
@@ -118,24 +84,10 @@ export default function Pasos() {
           </div>
         </div>
         <div className="row">
-          <div className="col-10 offset-1">
-            <FormularioServicioInternet
-              getData={getDato3}
-            ></FormularioServicioInternet>
-          </div>
-          <div className="col-4 offset-4 col-md-2 offset-md-4">
-            <button className="btn custom-btn" onClick={handlePrev}>
-              Volver
-            </button>
-          </div>
-          <div className="col-4 col-md-2">
-            <button
-              className="btn custom-btn btn-siguiente"
-              onClick={handleNext}
-            >
-              Siguiente
-            </button>
-          </div>
+          <FormularioServicioInternet
+            handlePrev={handlePrev}
+            handleNext={getDato3}
+          ></FormularioServicioInternet>
         </div>
       </div>
       <div className={count == 3 ? "mostrar" : "ocultar"}>
@@ -145,24 +97,10 @@ export default function Pasos() {
           </div>
         </div>
         <div className="row">
-          <div className="col-10 offset-1">
-            <FormularioMedioTransporte
-              getData={getDato4}
-            ></FormularioMedioTransporte>
-          </div>
-          <div className="col-4 offset-4 col-md-2 offset-md-4">
-            <button className="btn custom-btn" onClick={handlePrev}>
-              Volver
-            </button>
-          </div>
-          <div className="col-4 col-md-2">
-            <button
-              className="btn custom-btn btn-siguiente"
-              onClick={handleNext}
-            >
-              Siguiente
-            </button>
-          </div>
+          <FormularioMedioTransporte
+            handlePrev={handlePrev}
+            handleNext={getDato4}
+          ></FormularioMedioTransporte>
         </div>
       </div>
       <div className={count == 4 ? "mostrar" : "ocultar"}>
@@ -172,24 +110,23 @@ export default function Pasos() {
           </div>
         </div>
         <div className="row">
-          <div className="col-10 offset-1">
-            <FormularioActividadLaboral
-              getData={getDato5}
-            ></FormularioActividadLaboral>
+          <FormularioActividadLaboral
+            handlePrev={handlePrev}
+            handleNext={getDato5}
+          ></FormularioActividadLaboral>
+        </div>
+      </div>
+      <div className={count == 5 ? "mostrar" : "ocultar"}>
+        <div className="row">
+          <div className="col-6 offset-3">
+            <h2>Verifique si sus datos están correctos</h2>
           </div>
-          <div className="col-4 offset-4 col-md-2 offset-md-4">
-            <button className="btn custom-btn" onClick={handlePrev}>
-              Volver
-            </button>
-          </div>
-          <div className="col-4 col-md-2">
-            <button
-              className="btn custom-btn btn-siguiente"
-              onClick={enviarDatos}
-            >
-              Terminar y Enviar
-            </button>
-          </div>
+        </div>
+        <div className="row">
+          <DatosLlenados
+            handlePrev={handlePrev}
+            data={{ form1, form2, form3, form4, form5 }}
+          ></DatosLlenados>
         </div>
       </div>
     </>

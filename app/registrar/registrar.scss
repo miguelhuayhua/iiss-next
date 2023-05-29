@@ -43,7 +43,6 @@ form {
   border: 1px solid rgb(38, 101, 156);
   margin: 20px 0;
   width: 100%;
-  color: rgb(38, 101, 156);
   font-weight: bold;
   margin-top: 60px;
   &:hover {
@@ -52,6 +51,14 @@ form {
     transition: background-color 0.5s, color 0.5s;
   }
   animation: desde-arriba 2s;
+}
+.btn-confirmar{
+  animation: desde-arriba 2s;
+
+}
+.btn-cancelar{
+  animation: desde-arriba 2s;
+
 }
 
 .btn-siguiente {
