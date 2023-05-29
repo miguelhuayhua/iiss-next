@@ -49,13 +49,14 @@ export default function FormularioServiciosBasicos(props: any) {
     getData({
       servicioBasicos: { servicio1, servicio2, servicio3, servicio4 },
     });
-    //evento antes del cargado para llenar los datos main al principal
-    useEffect(() => {
-      getData({
-        servicioBasicos: { servicio1, servicio2, servicio3, servicio4 },
-      });
-    });
   };
+  //evento antes del cargado para llenar los datos main al principal
+  useEffect(() => {
+    getData({
+      servicioBasicos: { servicio1, servicio2, servicio3, servicio4 },
+    });
+  });
+
   return (
     <form action="">
       <div className="row">

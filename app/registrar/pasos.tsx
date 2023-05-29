@@ -6,11 +6,18 @@ import { MouseEventHandler, useState } from "react";
 import FormularioServicioInternet from "./formulario-internet";
 import FormularioMedioTransporte from "./formulario-transporte";
 import FormularioActividadLaboral from "./formulario-actvidadlaboral";
+
+//axios
+import axios from "axios";
 export default function Pasos() {
   const [count, setCount] = useState(0);
 
   //DATOS DE FORMULARIOS
-  let [mainData, setMainData] = useState({});
+  let [form1, setForm1] = useState({});
+  let [form2, setForm2] = useState({});
+  let [form3, setForm3] = useState({});
+  let [form4, setForm4] = useState({});
+  let [form5, setForm5] = useState({});
   //Formulario Datos Personales
 
   //eventos
@@ -21,13 +28,40 @@ export default function Pasos() {
     setCount(count - 1);
   };
   //LLAMADO DE DATOS HIJOS
-  let getDatos = (data: any) => {
-    setMainData({ ...mainData, ...data });
+  let getDato1 = (data: any) => {
+    setForm1({ ...form1, ...data });
+  };
+
+  let getDato2 = (data: any) => {
+    setForm2({ ...form2, ...data });
+  };
+
+  let getDato3 = (data: any) => {
+    setForm3({ ...form3, ...data });
+  };
+
+  let getDato4 = (data: any) => {
+    setForm4({ ...form4, ...data });
+  };
+
+  let getDato5 = (data: any) => {
+    setForm5({ ...form5, ...data});
   };
 
   //ENVÍO DE DATOS
-  const enviarDatos = () => {
-    console.log(mainData);
+  const enviarDatos = async () => {
+    try {
+      const response = await axios.post("http://localhost:8000/apersona/", {
+        form1,
+        form2,
+        form3,
+        form4,
+        form5,
+      });
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <>
@@ -40,7 +74,7 @@ export default function Pasos() {
         <div className="row">
           <div className="col-10 offset-1">
             <FormularioDatosPersonales
-              getData={getDatos}
+              getData={getDato1}
             ></FormularioDatosPersonales>
           </div>
           <div className="col-4 offset-4">
@@ -59,7 +93,7 @@ export default function Pasos() {
         <div className="row">
           <div className="col-10 offset-1">
             <FormularioServiciosBasicos
-              getData={getDatos}
+              getData={getDato2}
             ></FormularioServiciosBasicos>
           </div>
           <div className="col-4 offset-4 col-md-2 offset-md-4">
@@ -86,7 +120,7 @@ export default function Pasos() {
         <div className="row">
           <div className="col-10 offset-1">
             <FormularioServicioInternet
-              getData={getDatos}
+              getData={getDato3}
             ></FormularioServicioInternet>
           </div>
           <div className="col-4 offset-4 col-md-2 offset-md-4">
@@ -113,7 +147,7 @@ export default function Pasos() {
         <div className="row">
           <div className="col-10 offset-1">
             <FormularioMedioTransporte
-              getData={getDatos}
+              getData={getDato4}
             ></FormularioMedioTransporte>
           </div>
           <div className="col-4 offset-4 col-md-2 offset-md-4">
@@ -140,7 +174,7 @@ export default function Pasos() {
         <div className="row">
           <div className="col-10 offset-1">
             <FormularioActividadLaboral
-              getData={getDatos}
+              getData={getDato5}
             ></FormularioActividadLaboral>
           </div>
           <div className="col-4 offset-4 col-md-2 offset-md-4">

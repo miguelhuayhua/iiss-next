@@ -108,7 +108,7 @@ export default function FormularioDatosPersonales(props: any) {
   };
   //evento antes del cargado para llenar los datos main al principal
   useEffect(() => {
-    getData({ persona });
+    getData(persona);
   });
 
   //datos para el formulario
