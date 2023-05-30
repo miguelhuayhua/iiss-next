@@ -17,18 +17,18 @@ import { ChangeEvent, useEffect, useState } from "react";
 export default function FormularioActividadLaboral(props: any) {
   const { handleNext, handlePrev } = props;
   //estados para cada checkbox
-  const [laboral1, setLaboral1] = useState(2);
-  const [laboral2, setLaboral2] = useState(1);
-  const [laboralMulti1, setMulti1] = useState<number[]>([]);
-  const [laboralMulti2, setMulti2] = useState<number[]>([]);
-
+  const [laboral1, setLaboral1] = useState("");
+  const [laboral2, setLaboral2] = useState("");
+  const [laboralMulti1, setMulti1] = useState<string[]>([]);
+  const [laboralMulti2, setMulti2] = useState<string[]>([]);
+  const [otroLaboral1, setOtroLaboral1] = useState("");
   //manejo de eventos de los checkboxs
   const handleChange1 = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = Number(event.target.value);
+    const value = event.target.value;
     setLaboral1(value);
   };
   const handleChange2 = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = Number(event.target.value);
+    const value = event.target.value;
     if (laboralMulti1.includes(value)) {
       let index = laboralMulti1.indexOf(value);
       laboralMulti1.splice(index, 1);
@@ -38,7 +38,7 @@ export default function FormularioActividadLaboral(props: any) {
     }
   };
   const handleChange3 = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = Number(event.target.value);
+    const value = event.target.value;
     if (laboralMulti2.includes(value)) {
       let index = laboralMulti2.indexOf(value);
       laboralMulti2.splice(index, 1);
@@ -49,13 +49,22 @@ export default function FormularioActividadLaboral(props: any) {
   };
 
   const handleChange4 = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = Number(event.target.value);
+    const value = event.target.value;
     setLaboral2(value);
   };
-
+  const handleLaboral1 = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setOtroLaboral1(value);
+  };
   const siguiente = () => {
     handleNext({
-      servicioLaboral: { laboral1, laboral2, laboralMulti1, laboralMulti2 },
+      servicioLaboral: {
+        laboral1,
+        laboral2,
+        laboralMulti1,
+        laboralMulti2,
+        otroLaboral1,
+      },
     });
   };
   return (
@@ -74,12 +83,12 @@ export default function FormularioActividadLaboral(props: any) {
                     onChange={handleChange1}
                   >
                     <FormControlLabel
-                      value="1"
+                      value="Si"
                       control={<Radio />}
                       label="Sí"
                     />
                     <FormControlLabel
-                      value="2"
+                      value="No"
                       control={<Radio />}
                       label="No"
                     />
@@ -87,7 +96,7 @@ export default function FormularioActividadLaboral(props: any) {
                 </FormControl>
               </FormGroup>
             </div>
-            <div className={laboral1 == 1 ? "row mostrar" : "ocultar"}>
+            <div className={laboral1 == "Si" ? "row mostrar" : "ocultar"}>
               <div className="col-6 ">
                 <FormGroup>
                   <h3>Marque los meses que trabaja</h3>
@@ -96,9 +105,9 @@ export default function FormularioActividadLaboral(props: any) {
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={laboralMulti1.includes(1)}
+                          checked={laboralMulti1.includes("Enero")}
                           onChange={handleChange2}
-                          value="1"
+                          value="Enero"
                         />
                       }
                       label="Enero"
@@ -106,9 +115,9 @@ export default function FormularioActividadLaboral(props: any) {
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={laboralMulti1.includes(2)}
+                          checked={laboralMulti1.includes("Febrero")}
                           onChange={handleChange2}
-                          value="2"
+                          value="Febrero"
                         />
                       }
                       label="Febrero"
@@ -117,9 +126,9 @@ export default function FormularioActividadLaboral(props: any) {
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={laboralMulti1.includes(3)}
+                          checked={laboralMulti1.includes("Marzo")}
                           onChange={handleChange2}
-                          value="3"
+                          value="Marzo"
                         />
                       }
                       label="Marzo"
@@ -128,9 +137,9 @@ export default function FormularioActividadLaboral(props: any) {
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={laboralMulti1.includes(4)}
+                          checked={laboralMulti1.includes("Abril")}
                           onChange={handleChange2}
-                          value="4"
+                          value="Abril"
                         />
                       }
                       label="Abril"
@@ -139,9 +148,9 @@ export default function FormularioActividadLaboral(props: any) {
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={laboralMulti1.includes(5)}
+                          checked={laboralMulti1.includes("Mayo")}
                           onChange={handleChange2}
-                          value="5"
+                          value="Mayo"
                         />
                       }
                       label="Mayo"
@@ -150,9 +159,9 @@ export default function FormularioActividadLaboral(props: any) {
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={laboralMulti1.includes(6)}
+                          checked={laboralMulti1.includes("Junio")}
                           onChange={handleChange2}
-                          value="6"
+                          value="Junio"
                         />
                       }
                       label="Junio"
@@ -161,9 +170,9 @@ export default function FormularioActividadLaboral(props: any) {
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={laboralMulti1.includes(7)}
+                          checked={laboralMulti1.includes("Julio")}
                           onChange={handleChange2}
-                          value="7"
+                          value="Julio"
                         />
                       }
                       label="Julio"
@@ -172,9 +181,9 @@ export default function FormularioActividadLaboral(props: any) {
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={laboralMulti1.includes(8)}
+                          checked={laboralMulti1.includes("Agosto")}
                           onChange={handleChange2}
-                          value="8"
+                          value="Agosto"
                         />
                       }
                       label="Agosto"
@@ -183,9 +192,9 @@ export default function FormularioActividadLaboral(props: any) {
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={laboralMulti1.includes(9)}
+                          checked={laboralMulti1.includes("Septiembre")}
                           onChange={handleChange2}
-                          value="9"
+                          value="Septiembre"
                         />
                       }
                       label="Septiembre"
@@ -193,9 +202,9 @@ export default function FormularioActividadLaboral(props: any) {
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={laboralMulti1.includes(10)}
+                          checked={laboralMulti1.includes("Octubre")}
                           onChange={handleChange2}
-                          value="10"
+                          value="Octubre"
                         />
                       }
                       label="Octubre"
@@ -203,9 +212,9 @@ export default function FormularioActividadLaboral(props: any) {
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={laboralMulti1.includes(11)}
+                          checked={laboralMulti1.includes("Noviembre")}
                           onChange={handleChange2}
-                          value="11"
+                          value="Noviembre"
                         />
                       }
                       label="Noviembre"
@@ -213,9 +222,9 @@ export default function FormularioActividadLaboral(props: any) {
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={laboralMulti1.includes(12)}
+                          checked={laboralMulti1.includes("Diciembre")}
                           onChange={handleChange2}
-                          value="12"
+                          value="Diciembre"
                         />
                       }
                       label="Diciembre"
@@ -231,9 +240,9 @@ export default function FormularioActividadLaboral(props: any) {
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={laboralMulti2.includes(1)}
+                          checked={laboralMulti2.includes("Agricultura")}
                           onChange={handleChange3}
-                          value="1"
+                          value="Agricultura"
                         />
                       }
                       label="Agricultura"
@@ -241,9 +250,9 @@ export default function FormularioActividadLaboral(props: any) {
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={laboralMulti2.includes(2)}
+                          checked={laboralMulti2.includes("Ganaderia o pesca")}
                           onChange={handleChange3}
-                          value="2"
+                          value="Ganaderia o pesca"
                         />
                       }
                       label="Ganadería o pesca"
@@ -252,9 +261,9 @@ export default function FormularioActividadLaboral(props: any) {
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={laboralMulti2.includes(3)}
+                          checked={laboralMulti2.includes("Mineria")}
                           onChange={handleChange3}
-                          value="3"
+                          value="Mineria"
                         />
                       }
                       label="Minería"
@@ -263,20 +272,22 @@ export default function FormularioActividadLaboral(props: any) {
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={laboralMulti2.includes(4)}
+                          checked={laboralMulti2.includes(
+                            "Transporte o mecanica"
+                          )}
                           onChange={handleChange3}
-                          value="4"
+                          value="Transporte o mecanica"
                         />
                       }
-                      label="Minería"
+                      label="Transporte o mecánica"
                     />
 
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={laboralMulti2.includes(5)}
+                          checked={laboralMulti2.includes("Construccion")}
                           onChange={handleChange3}
-                          value="5"
+                          value="Construccion"
                         />
                       }
                       label="Construcción"
@@ -285,9 +296,11 @@ export default function FormularioActividadLaboral(props: any) {
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={laboralMulti2.includes(6)}
+                          checked={laboralMulti2.includes(
+                            "Vendedor independiente"
+                          )}
                           onChange={handleChange3}
-                          value="6"
+                          value="Vendedor independiente"
                         />
                       }
                       label="Vendedor Dependiente"
@@ -296,9 +309,9 @@ export default function FormularioActividadLaboral(props: any) {
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={laboralMulti2.includes(7)}
+                          checked={laboralMulti2.includes("Zafra")}
                           onChange={handleChange3}
-                          value="7"
+                          value="Zafra"
                         />
                       }
                       label="Zafra"
@@ -307,9 +320,11 @@ export default function FormularioActividadLaboral(props: any) {
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={laboralMulti2.includes(8)}
+                          checked={laboralMulti2.includes(
+                            "Vendedor por cuenta propia"
+                          )}
                           onChange={handleChange3}
-                          value="8"
+                          value="Vendedor por cuenta propia"
                         />
                       }
                       label="Vendedor por cuenta propia"
@@ -318,19 +333,11 @@ export default function FormularioActividadLaboral(props: any) {
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={laboralMulti2.includes(9)}
+                          checked={laboralMulti2.includes(
+                            "Trabajador(a) del hogar"
+                          )}
                           onChange={handleChange3}
-                          value="9"
-                        />
-                      }
-                      label="Transporte o mecánica"
-                    />
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={laboralMulti2.includes(10)}
-                          onChange={handleChange3}
-                          value="10"
+                          value="Trabajador(a) del hogar"
                         />
                       }
                       label="Trabajador(a) del hogar o niñero(a)"
@@ -338,9 +345,9 @@ export default function FormularioActividadLaboral(props: any) {
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={laboralMulti2.includes(11)}
+                          checked={laboralMulti2.includes("Comunitario")}
                           onChange={handleChange3}
-                          value="11"
+                          value="Comunitario"
                         />
                       }
                       label="Ayudante familiar o comunitario en agricultura o ganadería o pesca"
@@ -348,9 +355,11 @@ export default function FormularioActividadLaboral(props: any) {
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={laboralMulti2.includes(12)}
+                          checked={laboralMulti2.includes(
+                            "Ayudante hogar comercio o ventas"
+                          )}
                           onChange={handleChange3}
-                          value="12"
+                          value="Ayudante hogar comercio o ventas"
                         />
                       }
                       label="Ayudante en el hogar en comercio o ventas"
@@ -358,12 +367,37 @@ export default function FormularioActividadLaboral(props: any) {
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={laboralMulti2.includes(13)}
+                          checked={laboralMulti2.includes("Entidad publica")}
                           onChange={handleChange3}
-                          value="13"
+                          value="Entidad publica"
                         />
                       }
                       label="Trabajo en entidad pública"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={laboralMulti2.includes("Otro")}
+                          onChange={handleChange3}
+                          value="Otro"
+                        />
+                      }
+                      label="Otro"
+                    />
+
+                    <TextField
+                      required
+                      className={
+                        laboralMulti2.includes("Otro")
+                          ? "w-100 mostrar"
+                          : "ocultar"
+                      }
+                      id="standard-basic"
+                      label=""
+                      multiline
+                      variant="standard"
+                      value={otroLaboral1}
+                      onChange={handleLaboral1}
                     />
                   </div>
                 </FormGroup>
@@ -380,32 +414,32 @@ export default function FormularioActividadLaboral(props: any) {
                       onChange={handleChange4}
                     >
                       <FormControlLabel
-                        value="1"
+                        value="Diario"
                         control={<Radio />}
                         label="Todos los días"
                       />
                       <FormControlLabel
-                        value="2"
+                        value="Fin de semana"
                         control={<Radio />}
                         label="Fines de semana"
                       />
                       <FormControlLabel
-                        value="3"
+                        value="Dias festivos"
                         control={<Radio />}
                         label="Días festivos"
                       />
                       <FormControlLabel
-                        value="4"
+                        value="Dias habiles"
                         control={<Radio />}
                         label="Días hábiles"
                       />
                       <FormControlLabel
-                        value="5"
+                        value="Eventual"
                         control={<Radio />}
                         label="Eventual/esporádico"
                       />
                       <FormControlLabel
-                        value="6"
+                        value="En vacaciones"
                         control={<Radio />}
                         label="En vacaciones"
                       />

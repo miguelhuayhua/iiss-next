@@ -16,24 +16,24 @@ import { ChangeEvent, useEffect, useState } from "react";
 export default function FormularioServicioInternet(props: any) {
   const { handleNext, handlePrev } = props;
   //estados para cada checkbox
-  const [servicio1, setServicio1] = useState(0);
-  const [servicioMulti1, setServicioMulti1] = useState<number[]>([]);
+  const [servicio1, setServicio1] = useState("Diariamente");
+  const [servicioMulti1, setServicioMulti1] = useState<string[]>(["Vivienda"]);
   //evento antes del cargado para llenar los datos main al principal
 
   //manejo de eventos de los checkboxs
   const handleChange1 = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = Number(event.target.value);
+    const value = event.target.value;
     setServicio1(value);
   };
 
   const handleMultiChange1 = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = Number(event.target.value);
+    const value = event.target.value;
     if (servicioMulti1.includes(value)) {
       let index = servicioMulti1.indexOf(value);
       servicioMulti1.splice(index, 1);
       setServicioMulti1([...servicioMulti1]);
     } else {
-      if (value == 4) {
+      if (value == "No tiene") {
         setServicioMulti1([value]);
       } else {
         setServicioMulti1([...servicioMulti1, value]);
@@ -56,9 +56,9 @@ export default function FormularioServicioInternet(props: any) {
                   <FormControlLabel
                     control={
                       <Checkbox
-                        checked={servicioMulti1.includes(1)}
+                        checked={servicioMulti1.includes("Vivienda")}
                         onChange={handleMultiChange1}
-                        value="1"
+                        value="Vivienda"
                       />
                     }
                     label="Vivienda"
@@ -66,9 +66,9 @@ export default function FormularioServicioInternet(props: any) {
                   <FormControlLabel
                     control={
                       <Checkbox
-                        checked={servicioMulti1.includes(2)}
+                        checked={servicioMulti1.includes("Lugares publicos")}
                         onChange={handleMultiChange1}
-                        value="2"
+                        value="Lugares publicos"
                       />
                     }
                     label="Lugares Públicos"
@@ -76,9 +76,9 @@ export default function FormularioServicioInternet(props: any) {
                   <FormControlLabel
                     control={
                       <Checkbox
-                        checked={servicioMulti1.includes(3)}
+                        checked={servicioMulti1.includes("Telefono / Celular")}
                         onChange={handleMultiChange1}
-                        value="3"
+                        value="Telefono / Celular"
                       />
                     }
                     label="Teléfono / Celular"
@@ -86,9 +86,9 @@ export default function FormularioServicioInternet(props: any) {
                   <FormControlLabel
                     control={
                       <Checkbox
-                        checked={servicioMulti1.includes(4)}
+                        checked={servicioMulti1.includes("No tiene")}
                         onChange={handleMultiChange1}
-                        value="4"
+                        value="No tiene"
                       />
                     }
                     label="No accede a internet"
@@ -98,7 +98,7 @@ export default function FormularioServicioInternet(props: any) {
             </div>
             <div
               className={
-                servicioMulti1.includes(4)
+                servicioMulti1.includes("No tiene")
                   ? "ocultar"
                   : "col-8 offset-2 mostrar"
               }
@@ -108,27 +108,27 @@ export default function FormularioServicioInternet(props: any) {
                 <small> (marque solo una opción)</small>
                 <RadioGroup
                   aria-labelledby="demo-radio-buttons-group-label"
-                  defaultValue="1"
-                  name="radio-tiene-trabajo"
+                  defaultValue={1}
+                  name="radio-tiene-frecuencia"
                   onChange={handleChange1}
                 >
                   <FormControlLabel
-                    value="1"
+                    value="Diariamente"
                     control={<Radio />}
                     label="Diariamente"
                   />
                   <FormControlLabel
-                    value="2"
+                    value="Mas de una vez semana"
                     control={<Radio />}
                     label="Más de una vez a la semana"
                   />
                   <FormControlLabel
-                    value="3"
+                    value="Una vez a la semana"
                     control={<Radio />}
                     label="Una vez a la semana"
                   />
                   <FormControlLabel
-                    value="4"
+                    value="Una vez al mes"
                     control={<Radio />}
                     label="Una vez al mes"
                   />

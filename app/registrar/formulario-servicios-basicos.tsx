@@ -16,30 +16,29 @@ import { ChangeEvent, useEffect, useState } from "react";
 export default function FormularioServiciosBasicos(props: any) {
   const { handleNext, handlePrev } = props;
   //estados para cada checkbox
-  const [servicio1, setServicio1] = useState(0);
-  const [servicio2, setServicio2] = useState(0);
-  const [servicio3, setServicio3] = useState(0);
-  const [servicio4, setServicio4] = useState(0);
+  const [servicio1, setServicio1] = useState("Si");
+  const [servicio2, setServicio2] = useState("Si");
+  const [servicio3, setServicio3] = useState("Si");
+  const [servicio4, setServicio4] = useState("Si");
 
   //manejo de eventos de los checkboxs
   const handleChange1 = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = Number(event.target.value);
+    const value = event.target.value;
     setServicio1(value);
   };
   const handleChange2 = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = Number(event.target.value);
+    const value = event.target.value;
     setServicio2(value);
   };
   const handleChange3 = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = Number(event.target.value);
+    const value = event.target.value;
     setServicio3(value);
   };
   const handleChange4 = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = Number(event.target.value);
+    const value = event.target.value;
     setServicio4(value);
   };
   //evento antes del cargado para llenar los datos main al principal
-
   const siguiente = () => {
     handleNext({
       servicioBasicos: { servicio1, servicio2, servicio3, servicio4 },
@@ -56,17 +55,17 @@ export default function FormularioServiciosBasicos(props: any) {
                 <FormControl>
                   <RadioGroup
                     aria-labelledby="demo-radio-buttons-group-label"
-                    defaultValue="1"
-                    name="radio-tiene-trabajo"
+                    defaultValue="Si"
+                    name="radio-tiene-agua"
                     onChange={handleChange1}
                   >
                     <FormControlLabel
-                      value="1"
+                      value="Si"
                       control={<Radio />}
                       label="Sí"
                     />
                     <FormControlLabel
-                      value="2"
+                      value="No"
                       control={<Radio />}
                       label="No"
                     />
@@ -80,17 +79,17 @@ export default function FormularioServiciosBasicos(props: any) {
                 <FormControl>
                   <RadioGroup
                     aria-labelledby="demo-radio-buttons-group-label"
-                    defaultValue="1"
+                    defaultValue="Si"
                     name="radio-tiene-trabajo"
                     onChange={handleChange2}
                   >
                     <FormControlLabel
-                      value="1"
+                      value="Si"
                       control={<Radio />}
                       label="Sí"
                     />
                     <FormControlLabel
-                      value="2"
+                      value="No"
                       control={<Radio />}
                       label="No"
                     />
@@ -104,17 +103,17 @@ export default function FormularioServiciosBasicos(props: any) {
                 <FormControl>
                   <RadioGroup
                     aria-labelledby="demo-radio-buttons-group-label"
-                    defaultValue="1"
-                    name="radio-tiene-trabajo"
+                    defaultValue="Si"
+                    name="radio-tiene-alumbracion"
                     onChange={handleChange3}
                   >
                     <FormControlLabel
-                      value="1"
+                      value="Si"
                       control={<Radio />}
                       label="Sí"
                     />
                     <FormControlLabel
-                      value="2"
+                      value="No"
                       control={<Radio />}
                       label="No"
                     />
@@ -128,38 +127,38 @@ export default function FormularioServiciosBasicos(props: any) {
                 <small>(Marque sólo una opción)</small>
                 <RadioGroup
                   aria-labelledby="demo-radio-buttons-group-label"
-                  defaultValue="1"
+                  defaultValue="Propia"
                   name="radio-vivienda-ocupada"
                   onChange={handleChange4}
                 >
                   <div className="d-flex flex-wrap">
                     <FormControlLabel
-                      value="1"
+                      value="Propia"
                       control={<Radio />}
                       label="Propia"
                     />
                     <FormControlLabel
-                      value="2"
+                      value="Alquilada"
                       control={<Radio />}
                       label="Alquilada"
                     />
                     <FormControlLabel
-                      value="3"
+                      value="Anticretico"
                       control={<Radio />}
                       label="Anticrético"
                     />
                     <FormControlLabel
-                      value="4"
+                      value="Cedido por servicios"
                       control={<Radio />}
                       label="Cedida por servicios"
                     />
                     <FormControlLabel
-                      value="5"
+                      value="Prestado p/a"
                       control={<Radio />}
                       label="Prestada por parientes o amigos"
                     />
                     <FormControlLabel
-                      value="6"
+                      value="Alquiler o anticretico"
                       control={<Radio />}
                       label="Contrato Mixto(alquiler o anticrético)"
                     />

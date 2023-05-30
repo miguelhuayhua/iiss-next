@@ -54,11 +54,13 @@ form {
 }
 .btn-confirmar{
   animation: desde-arriba 2s;
-
+  width: 100%;
+  margin-top: 1em;
 }
 .btn-cancelar{
   animation: desde-arriba 2s;
-
+  width: 100%;
+  margin-top: 1em;
 }
 
 .btn-siguiente {
@@ -83,4 +85,12 @@ form {
 //mostrar y ocultar elementos del formulario
 .show-component{
   display: none;
+}
+
+
+
+//DECORACIÓN DE TIPO CAJA
+.box{
+  border: 1px solid black;
+  padding: 5px;
 }

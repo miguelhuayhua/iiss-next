@@ -16,12 +16,12 @@ import { ChangeEvent, useEffect, useState } from "react";
 export default function FormularioMedioTransporte(props: any) {
   const { handlePrev, handleNext } = props;
   //estados para cada checkbox
-  const [medio1, setMedio1] = useState(0);
-  const [otroMedio1, setOtroMedio1] = useState("");
-  const [medio2, setMedio2] = useState(0);
+  const [medio1, setMedio1] = useState("A pie");
+  const [otroMedio1, setOtroMedio1] = useState("Menos de media hora");
+  const [medio2, setMedio2] = useState("");
   //manejo de eventos de los checkboxs
   const handleChange1 = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = Number(event.target.value);
+    const value = event.target.value;
     setMedio1(value);
   };
   const handleMedio1 = (event: ChangeEvent<HTMLInputElement>) => {
@@ -29,13 +29,13 @@ export default function FormularioMedioTransporte(props: any) {
     setOtroMedio1(value);
   };
   const handleChange2 = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = Number(event.target.value);
+    const value = event.target.value;
     setMedio2(value);
   };
   //evento antes del cargado para llenar los datos main al principal
-const siguiente = () =>{
-  handleNext({ servicioTransporte: { medio1, otroMedio1, medio2 } });
-}
+  const siguiente = () => {
+    handleNext({ servicioTransporte: { medio1, otroMedio1, medio2 } });
+  };
   return (
     <>
       <div className="col-10 offset-1">
@@ -47,17 +47,17 @@ const siguiente = () =>{
                 <small>(Marque solo una opción)</small>
                 <RadioGroup
                   aria-labelledby="demo-radio-buttons-group-label"
-                  defaultValue="1"
+                  defaultValue={1}
                   name="radio-medio-1"
                   onChange={handleChange1}
                 >
                   <FormControlLabel
-                    value="1"
+                    value="A pie"
                     control={<Radio />}
                     label="A pie"
                   />
                   <FormControlLabel
-                    value="2"
+                    value="Vehiculo"
                     control={<Radio />}
                     label="En vehículo de transporte terrestre"
                   />
@@ -67,14 +67,14 @@ const siguiente = () =>{
                     label="Fluvial"
                   />
                   <FormControlLabel
-                    value="4"
+                    value="Otro"
                     control={<Radio />}
                     label="Otro (especifique)"
                   />
                 </RadioGroup>
                 <TextField
                   required
-                  className={medio1 == 4 ? "w-100 mostrar" : "ocultar"}
+                  className={medio1 == "otro" ? "w-100 mostrar" : "ocultar"}
                   id="standard-basic"
                   label=""
                   multiline
@@ -94,27 +94,27 @@ const siguiente = () =>{
                 <small>(Marque solo una opción)</small>
                 <RadioGroup
                   aria-labelledby="demo-radio-buttons-group-label"
-                  defaultValue="1"
+                  defaultValue={1}
                   name="radio-medio-1"
                   onChange={handleChange2}
                 >
                   <FormControlLabel
-                    value="1"
+                    value="Menos de media hora"
                     control={<Radio />}
                     label="Menos de media hora"
                   />
                   <FormControlLabel
-                    value="2"
+                    value="Entre 1 hora y media hora"
                     control={<Radio />}
                     label="Entre media hora y una hora"
                   />
                   <FormControlLabel
-                    value="3"
+                    value="Entre 1 a 2 horas"
                     control={<Radio />}
                     label="Entre una a dos horas"
                   />
                   <FormControlLabel
-                    value="4"
+                    value="Mas de 2 horas"
                     control={<Radio />}
                     label="Más de dos horas"
                   />
